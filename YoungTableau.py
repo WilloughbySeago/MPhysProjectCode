@@ -17,6 +17,7 @@ The partition must be sorted in decreasing order
 """
 
 import warnings
+import numpy.polynomial.polynomial as polynomial
 
 # Constants
 BOX_CHARACTER = "☐"
@@ -73,5 +74,28 @@ class YoungTableau(object):
         internal_representation += f"Diagram:\n{self.get_diagram_string()}"
         return internal_representation
 
-    def set_box_values(self, values: list[list[int]]):
-        pass
+    def dimension_polynomial(self):
+        """
+        Implements the polynomial part of the dimension formula, that is for a diagram, Y, this method
+        returns the polynomial f_Y(n) which is such that d_Y = f_Y(n) / hook number
+        The polynomial is given by putting n in the top left box, then decreasing to the right,
+        then n + 1 in the box below the top left and decreasing to the right and so on
+        eg, for the diagram
+
+        ☐☐☐
+        ☐☐
+        ☐☐
+        n   n-1 n-2
+        n+1 n
+        n+2 n-1
+
+        f_Y(n) = n^2 (n - 2) (n - 1)^2 (n + 1) (n + 2)
+        :return: (np.polynomial.polynomial.Polynomial)
+        """
+        dim_poly = polynomial.Polynomial([1])  # the unit polynomial
+        offset = 0
+        for row_length in self.partition:
+            for i in range(row_length):
+                dim_poly *= polynomial.Polynomial([offset - i, 1])  # the polynomial n + offset - i
+            offset += 1  # increment starting value each row
+        return dim_poly
