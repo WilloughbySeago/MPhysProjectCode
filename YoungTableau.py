@@ -96,6 +96,6 @@ class YoungTableau(object):
         offset = 0
         for row_length in self.partition:
             for i in range(row_length):
-                dim_poly *= polynomial.Polynomial([offset - i, 1])  # the polynomial n + offset - i
+                dim_poly *= polynomial.Polynomial([i - offset, 1])  # the polynomial n + offset - i
             offset += 1  # increment starting value each row
         return dim_poly

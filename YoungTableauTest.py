@@ -104,13 +104,19 @@ class TestYoungTableau(unittest.TestCase):
             YoungTableau.YoungTableau([3, 2, 1, 4])
 
     def test_dimension_polynomial(self):
+        # ☐☐
+        # ☐☐
         young_tableau = YoungTableau.YoungTableau([2, 2])
         # should be n^2(n^2 - 1) = n^4 - n^2
         self.assertEqual(young_tableau.dimension_polynomial(), polynomial.Polynomial([0, 0, -1, 0, 1]))
+        # ☐
+        # ☐
+        # ☐
+        # ☐
         young_tableau = YoungTableau.YoungTableau([1, 1, 1, 1])
         # should be n(n - 1)(n - 2)(n - 3) = -6 n + 11 n^2 - 6 n^3 + n^4
-        print(young_tableau.dimension_polynomial())
         self.assertEqual(young_tableau.dimension_polynomial(), polynomial.Polynomial([0, -6, 11, -6, 1]))
+        # ☐☐☐☐
         young_tableau = YoungTableau.YoungTableau([4])
         # should be n(n + 1)(n + 2)(n + 3) = 6 n + 11 n^2 + 6 n^3 + n^4
         self.assertEqual(young_tableau.dimension_polynomial(), polynomial.Polynomial([0, 6, 11, 6, 1]))
