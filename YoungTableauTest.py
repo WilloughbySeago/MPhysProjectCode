@@ -120,7 +120,13 @@ class TestYoungTableau(unittest.TestCase):
         young_tableau = YoungTableau.YoungTableau([4])
         # should be n(n + 1)(n + 2)(n + 3) = 6 n + 11 n^2 + 6 n^3 + n^4
         self.assertEqual(young_tableau.dimension_polynomial(), polynomial.Polynomial([0, 6, 11, 6, 1]))
-
+        # ☐☐☐☐
+        # ☐☐
+        # ☐
+        # ☐
+        young_tableau = YoungTableau.YoungTableau([4, 2, 1, 1])
+        # should be n^2(n + 1)(n + 2)(n + 3)(n - 1)(n - 2)(n - 3) = -36 n^2 + 49 n^4 - 14 n^6 + n^8
+        self.assertEqual(young_tableau.dimension_polynomial(), polynomial.Polynomial([0, 0, -36, 0, 49, 0, -14, 0, 1]))
 
 if __name__ == "__main__":
     unittest.main()
